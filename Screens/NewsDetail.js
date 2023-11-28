@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import homeicon from '../Assests/homeicon.png';
+import homeicon from '../Assets/homeicon.png';
 
 const NewsDetail = ({navigation, route}) => {
   const {item} = route.params;
@@ -21,9 +21,13 @@ const NewsDetail = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator="false">
-        <View>
+        <View style={{backgroundColor: '#ffffff'}}>
           <Image
-            source={{uri: item.image_url}}
+            source={
+              item.image_url
+                ? {uri: item.image_url}
+                : require('../Assets/flashfeed.jpg')
+            }
             style={{width: '100%', height: 200}}
           />
           <View style={{padding: 14}}>

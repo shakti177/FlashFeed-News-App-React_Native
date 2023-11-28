@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Image,
   ActivityIndicator,
   Pressable,
@@ -48,6 +47,7 @@ const Home = ({navigation}) => {
         <View style={styles.mainContainer}>
           <FlatList
             data={news}
+            showsVerticalScrollIndicator="false"
             renderItem={({item}) => {
               return (
                 <View style={styles.newsContainer}>
@@ -56,8 +56,12 @@ const Home = ({navigation}) => {
                       navigation.navigate('NewsDetail', {item: item})
                     }>
                     <Image
-                      source={{uri: item.image_url}}
-                      style={{width: '100%', height: 180}}
+                      source={
+                        item.image_url
+                          ? {uri: item.image_url}
+                          : require('../Assets/flashfeed.jpg')
+                      }
+                      style={{width: '100%', height: 200}}
                     />
                     <View style={styles.textContainer}>
                       <Text
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   newsContainer: {
-    // backgroundColor: '#00b4d8',
+    backgroundColor: '#ffffff',
     marginBottom: 15,
   },
   mainContainer: {
