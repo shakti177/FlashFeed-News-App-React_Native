@@ -15,7 +15,7 @@ const Home = ({navigation}) => {
 
   const getAPIData = async () => {
     const URL =
-      'https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in';
+      'https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in&prioritydomain=top';
     const res = await fetch(URL);
     const data = await res.json();
     setNews(data.results);
@@ -39,7 +39,7 @@ const Home = ({navigation}) => {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              height: '94%',
+              height: '93%',
             }}
           />
         </View>
@@ -61,14 +61,20 @@ const Home = ({navigation}) => {
                           ? {uri: item.image_url}
                           : require('../Assets/flashfeed.jpg')
                       }
-                      style={{width: '100%', height: 200}}
+                      style={{
+                        width: '100%',
+                        height: 200,
+                        resizeMode: 'cover',
+                        backgroundColor : "#ffffff",
+                        marginBottom: 8
+                      }}
                     />
                     <View style={styles.textContainer}>
                       <Text
                         style={{
                           fontSize: 20,
                           fontWeight: '700',
-                          marginBottom: 7,
+                          marginBottom: 10,
                           textAlign: 'left',
                         }}>
                         {item.title}
@@ -77,7 +83,7 @@ const Home = ({navigation}) => {
                         style={{
                           justifyContent: 'space-between',
                           flexDirection: 'row',
-                          marginBottom: 9,
+                          marginBottom: 20,
                         }}>
                         <Text style={{fontSize: 14, fontWeight: '600'}}>
                           {item.pubDate}
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#fff',
+    color: '#ffffff',
     fontSize: 26,
     fontWeight: '700',
   },
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   mainContainer: {
-    // backgroundColor: '#03045e',
+    backgroundColor: '#ffffff',
     // padding: 10,
     paddingBottom: 80,
   },

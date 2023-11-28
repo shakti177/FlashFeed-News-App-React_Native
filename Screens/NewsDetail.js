@@ -28,12 +28,12 @@ const NewsDetail = ({navigation, route}) => {
                 ? {uri: item.image_url}
                 : require('../Assets/flashfeed.jpg')
             }
-            style={{width: '100%', height: 200}}
+            style={{width: '100%', height: 250}}
           />
           <View style={{padding: 14}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 23,
                 fontWeight: '700',
                 marginBottom: 13,
                 textAlign: 'left',
