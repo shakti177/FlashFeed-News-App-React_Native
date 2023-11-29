@@ -39,7 +39,7 @@ const Home = ({navigation}) => {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              height: '93%',
+              height: '92%',
             }}
           />
         </View>
