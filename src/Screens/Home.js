@@ -35,7 +35,7 @@ const Home = ({navigation}) => {
         <View>
           <ActivityIndicator
             size="large"
-            color="blue"
+            color="#d00000"
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -65,8 +65,8 @@ const Home = ({navigation}) => {
                         width: '100%',
                         height: 200,
                         resizeMode: 'cover',
-                        backgroundColor : "#ffffff",
-                        marginBottom: 8
+                        backgroundColor: '#ffffff',
+                        marginBottom: 8,
                       }}
                     />
                     <View style={styles.textContainer}>
@@ -85,7 +85,11 @@ const Home = ({navigation}) => {
                           flexDirection: 'row',
                           marginBottom: 20,
                         }}>
-                        <Text style={{fontSize: 14, fontWeight: '600'}}>
+                        <Text
+                          style={{
+                            fontSize: 14,
+                            fontWeight: '600',
+                          }}>
                           {item.pubDate}
                         </Text>
                         <Text
@@ -93,6 +97,7 @@ const Home = ({navigation}) => {
                             textTransform: 'capitalize',
                             fontSize: 14,
                             fontWeight: '600',
+                            color: '#d00000',
                           }}>
                           {item.category}
                         </Text>

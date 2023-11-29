@@ -28,7 +28,7 @@ const NewsDetail = ({navigation, route}) => {
                 ? {uri: item.image_url}
                 : require('../Assets/flashfeed.jpg')
             }
-            style={{width: '100%', height: 220, resizeMode: 'contain'}}
+            style={{width: '100%', height: 220, resizeMode: 'cover'}}
           />
           <View style={{padding: 14}}>
             <Text
@@ -54,6 +54,7 @@ const NewsDetail = ({navigation, route}) => {
                   textTransform: 'capitalize',
                   fontSize: 14,
                   fontWeight: '600',
+                  color: '#d00000',
                 }}>
                 {item.category}
               </Text>

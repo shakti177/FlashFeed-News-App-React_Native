@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import MyStack from './Navigation';
+import MyStack from './src/Navigation';
 
 const App = () => {
   return (
