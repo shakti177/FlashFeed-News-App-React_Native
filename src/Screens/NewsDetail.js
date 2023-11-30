@@ -20,7 +20,7 @@ const NewsDetail = ({navigation, route}) => {
           <Image source={homeicon} style={styles.homeIcon} />
         </TouchableOpacity>
       </View>
-      <ScrollView showsVerticalScrollIndicator="false">
+      <ScrollView>
         <View style={{backgroundColor: '#ffffff'}}>
           <Image
             source={
