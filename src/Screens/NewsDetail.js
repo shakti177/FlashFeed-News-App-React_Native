@@ -37,6 +37,7 @@ const NewsDetail = ({navigation, route}) => {
                 fontWeight: '700',
                 marginBottom: 13,
                 textAlign: 'left',
+                color: '#000000',
               }}>
               {item.title}
             </Text>
@@ -46,7 +47,7 @@ const NewsDetail = ({navigation, route}) => {
                 flexDirection: 'row',
                 marginBottom: 20,
               }}>
-              <Text style={{fontSize: 14, fontWeight: '600'}}>
+              <Text style={{fontSize: 14, fontWeight: '600', color: '#000000'}}>
                 {item.pubDate}
               </Text>
               <Text
@@ -65,6 +66,7 @@ const NewsDetail = ({navigation, route}) => {
                 fontSize: 17,
                 marginBottom: 80,
                 lineHeight: 23,
+                color: '#000000',
               }}>
               {item.content}
             </Text>
@@ -79,7 +81,6 @@ export default NewsDetail;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 70,
     backgroundColor: '#ffffff',
   },
   titleContainer: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#fff',
+    color: '#ffffff',
     fontSize: 26,
     fontWeight: '700',
     marginRight: 'auto',

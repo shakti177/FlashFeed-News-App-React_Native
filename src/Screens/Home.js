@@ -47,7 +47,6 @@ const Home = ({navigation}) => {
         <View style={styles.mainContainer}>
           <FlatList
             data={news}
-            showsVerticalScrollIndicator="false"
             renderItem={({item}) => {
               return (
                 <View style={styles.newsContainer}>
@@ -76,6 +75,7 @@ const Home = ({navigation}) => {
                           fontWeight: '700',
                           marginBottom: 10,
                           textAlign: 'left',
+                          color: '#000000', 
                         }}>
                         {item.title}
                       </Text>
@@ -89,6 +89,7 @@ const Home = ({navigation}) => {
                           style={{
                             fontSize: 14,
                             fontWeight: '600',
+                            color: '#000000',
                           }}>
                           {item.pubDate}
                         </Text>
@@ -104,7 +105,11 @@ const Home = ({navigation}) => {
                       </View>
                       <Text
                         numberOfLines={4}
-                        style={{fontSize: 15, textAlign: 'left'}}>
+                        style={{
+                          fontSize: 15,
+                          textAlign: 'left',
+                          color: '#000000',
+                        }}>
                         {item.description}
                       </Text>
                     </View>
@@ -123,7 +128,6 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 70,
     height: '100%',
     backgroundColor: '#ffffff',
   },
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#ffffff',
     // padding: 10,
-    paddingBottom: 80,
+    // paddingBottom: 80,
   },
   textContainer: {
     padding: 15,
