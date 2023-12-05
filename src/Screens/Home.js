@@ -10,16 +10,116 @@ import {
 import React, {useEffect, useState} from 'react';
 
 const Home = ({navigation}) => {
-  const [news, setNews] = useState();
+  const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [nextPageId, setNextPageId] = useState(null);
 
-  const getAPIData = async () => {
-    const URL =
+  const getAPIData = async (pageID = null) => {
+    let URL =
       'https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in&prioritydomain=top';
+
+    if (pageID) {
+      URL += `&page=${pageID}`;
+    }
+
     const res = await fetch(URL);
     const data = await res.json();
-    setNews(data.results);
+
+    if (data && data.results && Array.isArray(data.results)) {
+      setNews(prevNews => [...prevNews, ...data.results]);
+      setNextPageId(data.nextPage);
+    }
     setIsLoading(false);
+  };
+
+  const renderItem = ({item}) => {
+    return (
+      <View style={styles.newsContainer}>
+        <Pressable
+          onPress={() => navigation.navigate('NewsDetail', {item: item})}>
+          <Image
+            source={
+              item.image_url
+                ? {uri: item.image_url}
+                : require('../Assets/flashfeed.jpg')
+            }
+            style={{
+              width: '100%',
+              height: 200,
+              resizeMode: 'cover',
+              backgroundColor: '#ffffff',
+              marginBottom: 8,
+            }}
+          />
+          <View style={styles.textContainer}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '700',
+                marginBottom: 10,
+                textAlign: 'left',
+                color: '#000000',
+              }}>
+              {item.title}
+            </Text>
+            <View
+              style={{
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                marginBottom: 20,
+              }}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: '600',
+                  color: '#000000',
+                }}>
+                {item.pubDate}
+              </Text>
+              <Text
+                style={{
+                  textTransform: 'capitalize',
+                  fontSize: 14,
+                  fontWeight: '600',
+                  color: '#d00000',
+                }}>
+                {item.category}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={4}
+              style={{
+                fontSize: 15,
+                textAlign: 'left',
+                color: '#000000',
+              }}>
+              {item.description}
+            </Text>
+          </View>
+        </Pressable>
+      </View>
+    );
+  };
+
+  const renderLoader = () => {
+    return (
+      <View>
+        <ActivityIndicator
+          size="large"
+          color="#d00000"
+          style={{
+            // marginVertical: 16,
+            alignItems: 'center',
+          }}
+        />
+      </View>
+    );
+  };
+
+  const loadMoreNews = () => {
+    if (nextPageId) {
+      getAPIData(nextPageId);
+    }
   };
 
   useEffect(() => {
@@ -39,7 +139,7 @@ const Home = ({navigation}) => {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              height: '92%',
+              height: '100%',
             }}
           />
         </View>
@@ -47,76 +147,10 @@ const Home = ({navigation}) => {
         <View style={styles.mainContainer}>
           <FlatList
             data={news}
-            renderItem={({item}) => {
-              return (
-                <View style={styles.newsContainer}>
-                  <Pressable
-                    onPress={() =>
-                      navigation.navigate('NewsDetail', {item: item})
-                    }>
-                    <Image
-                      source={
-                        item.image_url
-                          ? {uri: item.image_url}
-                          : require('../Assets/flashfeed.jpg')
-                      }
-                      style={{
-                        width: '100%',
-                        height: 200,
-                        resizeMode: 'cover',
-                        backgroundColor: '#ffffff',
-                        marginBottom: 8,
-                      }}
-                    />
-                    <View style={styles.textContainer}>
-                      <Text
-                        style={{
-                          fontSize: 20,
-                          fontWeight: '700',
-                          marginBottom: 10,
-                          textAlign: 'left',
-                          color: '#000000', 
-                        }}>
-                        {item.title}
-                      </Text>
-                      <View
-                        style={{
-                          justifyContent: 'space-between',
-                          flexDirection: 'row',
-                          marginBottom: 20,
-                        }}>
-                        <Text
-                          style={{
-                            fontSize: 14,
-                            fontWeight: '600',
-                            color: '#000000',
-                          }}>
-                          {item.pubDate}
-                        </Text>
-                        <Text
-                          style={{
-                            textTransform: 'capitalize',
-                            fontSize: 14,
-                            fontWeight: '600',
-                            color: '#d00000',
-                          }}>
-                          {item.category}
-                        </Text>
-                      </View>
-                      <Text
-                        numberOfLines={4}
-                        style={{
-                          fontSize: 15,
-                          textAlign: 'left',
-                          color: '#000000',
-                        }}>
-                        {item.description}
-                      </Text>
-                    </View>
-                  </Pressable>
-                </View>
-              );
-            }}
+            renderItem={renderItem}
+            ListFooterComponent={renderLoader}
+            onEndReached={loadMoreNews}
+            onEndReachedThreshold={0.1}
           />
         </View>
       )}
@@ -130,6 +164,7 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: '#ffffff',
+    paddingBottom: 60,
   },
   titleContainer: {
     alignItems: 'center',

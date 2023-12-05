@@ -2,7 +2,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../Screens/Home';
 import NewsDetail from '../Screens/NewsDetail';
 import {CardStyleInterpolators} from '@react-navigation/stack';
-
 const Stack = createStackNavigator();
 
 function MyStack() {
