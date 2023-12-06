@@ -8,6 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import Slider from '../Components/Slider/Slider';
 
 const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
@@ -126,6 +127,8 @@ const Home = ({navigation}) => {
     getAPIData();
   }, []);
 
+  const topNews = news.slice(0, 10);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -148,6 +151,9 @@ const Home = ({navigation}) => {
           <FlatList
             data={news}
             renderItem={renderItem}
+            ListHeaderComponent={
+              <Slider topNews={topNews} navigation={navigation} />
+            }
             ListFooterComponent={renderLoader}
             onEndReached={loadMoreNews}
             onEndReachedThreshold={0.1}
@@ -182,12 +188,11 @@ const styles = StyleSheet.create({
 
   newsContainer: {
     backgroundColor: '#ffffff',
-    marginBottom: 15,
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
   mainContainer: {
     backgroundColor: '#ffffff',
-    // padding: 10,
-    // paddingBottom: 80,
   },
   textContainer: {
     padding: 15,
