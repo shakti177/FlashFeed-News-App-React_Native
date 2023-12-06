@@ -52,7 +52,7 @@ const Home = ({navigation}) => {
               marginBottom: 8,
             }}
           />
-          <View style={styles.textContainer}>
+          <View>
             <Text
               style={{
                 fontSize: 20,
@@ -67,7 +67,7 @@ const Home = ({navigation}) => {
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                marginBottom: 20,
+                marginBottom: 15,
               }}>
               <Text
                 style={{
@@ -188,13 +188,10 @@ const styles = StyleSheet.create({
 
   newsContainer: {
     backgroundColor: '#ffffff',
-    marginBottom: 10,
+    marginBottom: 20,
     paddingHorizontal: 10,
   },
   mainContainer: {
     backgroundColor: '#ffffff',
-  },
-  textContainer: {
-    padding: 15,
   },
 });
