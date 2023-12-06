@@ -17,7 +17,7 @@ const Home = ({navigation}) => {
 
   const getAPIData = async (pageID = null) => {
     let URL =
-      'https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in&prioritydomain=top';
+      'https://newsdata.io/api/1/news?apikey=pub_342405caad2a216ccef37ce49c5757f947f93&language=en&country=in&prioritydomain=top';
 
     if (pageID) {
       URL += `&page=${pageID}`;
@@ -87,7 +87,6 @@ const Home = ({navigation}) => {
                   borderRadius: 10,
                   paddingVertical: 2,
                   paddingHorizontal: 9,
-                  alignContent: 'center',
                 }}>
                 {item.category}
               </Text>
