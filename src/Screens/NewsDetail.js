@@ -65,7 +65,7 @@ const NewsDetail = ({navigation, route}) => {
                 textAlign: 'left',
                 fontSize: 17,
                 marginBottom: 80,
-                lineHeight: 23,
+                lineHeight: 28,
                 color: '#000000',
               }}>
               {item.content}

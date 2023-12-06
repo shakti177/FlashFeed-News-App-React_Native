@@ -82,7 +82,12 @@ const Home = ({navigation}) => {
                   textTransform: 'capitalize',
                   fontSize: 14,
                   fontWeight: '600',
-                  color: '#d00000',
+                  color: '#D00000',
+                  backgroundColor: '#FFB0B0',
+                  borderRadius: 10,
+                  paddingVertical: 2,
+                  paddingHorizontal: 9,
+                  alignContent: 'center',
                 }}>
                 {item.category}
               </Text>
