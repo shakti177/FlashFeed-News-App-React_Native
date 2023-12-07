@@ -14,7 +14,6 @@ const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPageId, setNextPageId] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
 
   const getAPIData = async (pageID = null) => {
     let URL =
@@ -128,12 +127,6 @@ const Home = ({navigation}) => {
     }
   };
 
-  const handleRefresh = () => {
-    setRefreshing(true);
-    getAPIData();
-    setRefreshing(false);
-  };
-
   useEffect(() => {
     getAPIData();
   }, []);
@@ -168,8 +161,6 @@ const Home = ({navigation}) => {
             ListFooterComponent={renderLoader}
             onEndReached={loadMoreNews}
             onEndReachedThreshold={0.1}
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
           />
         </View>
       )}
