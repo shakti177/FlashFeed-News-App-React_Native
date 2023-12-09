@@ -9,11 +9,24 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Slider from '../Components/Slider/Slider';
+import CheckInternet from './CheckInternet';
+import NetInfo from '@react-native-community/netinfo';
 
 const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPageId, setNextPageId] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const getAPIData = async (pageID = null) => {
     let URL =
@@ -128,8 +141,12 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    getAPIData();
-  }, []);
+    if (isConnected) {
+      getAPIData();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isConnected]);
 
   const topNews = news.slice(0, 10);
 
@@ -150,19 +167,23 @@ const Home = ({navigation}) => {
             }}
           />
         </View>
-      ) : (
+      ) : isConnected ? (
         <View style={styles.mainContainer}>
           <FlatList
             data={news}
             renderItem={renderItem}
             ListHeaderComponent={
-              <Slider topNews={topNews} navigation={navigation} />
+              <View>
+                <Slider topNews={topNews} navigation={navigation} />
+              </View>
             }
             ListFooterComponent={renderLoader}
             onEndReached={loadMoreNews}
             onEndReachedThreshold={0.1}
           />
         </View>
+      ) : (
+        <CheckInternet />
       )}
     </View>
   );
