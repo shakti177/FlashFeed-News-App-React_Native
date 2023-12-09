@@ -142,7 +142,7 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     if (isConnected) {
-      getAPIData();
+      getAPIData(nextPageId);
     } else {
       setIsLoading(false);
     }
@@ -163,7 +163,6 @@ const Home = ({navigation}) => {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              height: '100%',
             }}
           />
         </View>

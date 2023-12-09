@@ -86,6 +86,7 @@ export default NewsDetail;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
+    height: '100%',
   },
   titleContainer: {
     justifyContent: 'center',

@@ -33,7 +33,9 @@ const CheckInternet = () => {
           color: 'white',
           borderRadius: 10,
         }}>
-        <Text style={{color: 'white', fontWeight: '600'}}>Refresh</Text>
+        <Text style={{color: 'white', fontWeight: '600', fontSize: 19}}>
+          Refresh
+        </Text>
       </TouchableOpacity>
     </View>
   );
