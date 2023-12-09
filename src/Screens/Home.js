@@ -9,49 +9,28 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Slider from '../Components/Slider/Slider';
-import NetInfo from '@react-native-community/netinfo';
 
 const Home = ({navigation}) => {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPageId, setNextPageId] = useState(null);
-  const [isConnected, setIsConnected] = useState(true);
 
   const getAPIData = async (pageID = null) => {
     let URL =
-      'https://newsdata.io/api/1/news?apikey=pub_342405caad2a216ccef37ce49c5757f947f93&language=en&country=in&prioritydomain=top';
+      'https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in&prioritydomain=top';
 
     if (pageID) {
       URL += `&page=${pageID}`;
     }
 
-    try {
-      const res = await fetch(URL);
-      if (!res.ok) {
-        setIsLoading(false);
-        return;
-      }
+    const res = await fetch(URL);
+    const data = await res.json();
 
-      const data = await res.json();
-
-      if (data && data.results && Array.isArray(data.results)) {
-        setNews(prevNews => [...prevNews, ...data.results]);
-        setNextPageId(data.nextPage);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
+    if (data && data.results && Array.isArray(data.results)) {
+      setNews(prevNews => [...prevNews, ...data.results]);
+      setNextPageId(data.nextPage);
     }
-  };
-
-  const checkInternetConnection = async () => {
-    const netInfo = await NetInfo.fetch();
-    setIsConnected(netInfo.isConnected);
-  };
-
-  const handleRefresh = () => {
-    setIsLoading(true);
-    getAPIData();
+    setIsLoading(false);
   };
 
   const renderItem = ({item}) => {
@@ -149,23 +128,7 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getAPIData();
-    };
-
-    fetchData();
-
-    const unsubscribe = NetInfo.addEventListener(state => {
-      setIsConnected(state.isConnected);
-
-      if (state.isConnected) {
-        fetchData();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    getAPIData();
   }, []);
 
   const topNews = news.slice(0, 10);
@@ -175,14 +138,7 @@ const Home = ({navigation}) => {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Flash Feed</Text>
       </View>
-      {!isConnected ? (
-        <View style={styles.noInternetContainer}>
-          <Text style={styles.noInternetText}>No internet connection</Text>
-          <Pressable onPress={handleRefresh}>
-            <Text style={styles.refreshButton}>Refresh</Text>
-          </Pressable>
-        </View>
-      ) : isLoading ? (
+      {isLoading ? (
         <View>
           <ActivityIndicator
             size="large"
@@ -241,29 +197,5 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     backgroundColor: '#ffffff',
-  },
-  noInternetContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noInternetText: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  refreshButton: {
-    fontSize: 18,
-    color: '#d00000',
-    fontWeight: 'bold',
-    borderWidth: 2,
-    borderColor: '#d00000',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    textAlign: 'center',
-  },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
