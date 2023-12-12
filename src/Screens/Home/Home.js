@@ -8,8 +8,8 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import Slider from '../Components/Slider/Slider';
-import CheckInternet from './CheckInternet';
+import Slider from '../../Components/Slider/Slider';
+import CheckInternet from '../CheckInternet';
 import NetInfo from '@react-native-community/netinfo';
 
 const Home = ({navigation}) => {
@@ -55,7 +55,7 @@ const Home = ({navigation}) => {
             source={
               item.image_url
                 ? {uri: item.image_url}
-                : require('../Assets/flashfeed.jpg')
+                : require('../../Assets/flashfeed.jpg')
             }
             style={{
               width: '100%',
@@ -141,14 +141,16 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (isConnected) {
-      getAPIData(nextPageId);
-    } else {
-      setIsLoading(false);
-    }
-  }, [isConnected]);
+    const fetchData = async () => {
+      if (isConnected) {
+        await getAPIData(nextPageId);
+      } else {
+        setIsLoading(false);
+      }
+    };
 
-  const topNews = news.slice(0, 10);
+    fetchData();
+  }, [isConnected]);
 
   return (
     <View style={styles.container}>
@@ -156,15 +158,8 @@ const Home = ({navigation}) => {
         <Text style={styles.title}>Flash Feed</Text>
       </View>
       {isLoading ? (
-        <View>
-          <ActivityIndicator
-            size="large"
-            color="#d00000"
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          />
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator size="large" color="#d00000" />
         </View>
       ) : isConnected ? (
         <View style={styles.mainContainer}>
@@ -173,7 +168,7 @@ const Home = ({navigation}) => {
             renderItem={renderItem}
             ListHeaderComponent={
               <View>
-                <Slider topNews={topNews} navigation={navigation} />
+                <Slider topNews={news.slice(0, 10)} navigation={navigation} />
               </View>
             }
             ListFooterComponent={renderLoader}

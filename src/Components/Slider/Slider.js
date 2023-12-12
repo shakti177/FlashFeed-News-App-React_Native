@@ -45,7 +45,7 @@ const Slider = ({topNews, navigation}) => {
                   source={
                     item.image_url
                       ? {uri: item.image_url}
-                      : require('../../Assets/flashfeed.jpg')
+                      : require("../../Assets/flashfeed.jpg")
                   }
                   resizeMode="cover"
                   borderRadius={10}

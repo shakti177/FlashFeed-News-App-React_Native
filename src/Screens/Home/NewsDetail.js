@@ -7,18 +7,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import homeicon from '../Assets/homeicon.png';
 
-const NewsDetail = ({navigation, route}) => {
+const NewsDetail = ({route}) => {
   const {item} = route.params;
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Flash Feed</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Image source={homeicon} style={styles.homeIcon} />
-        </TouchableOpacity>
       </View>
       <ScrollView>
         <View style={{backgroundColor: '#ffffff'}}>
@@ -26,7 +22,7 @@ const NewsDetail = ({navigation, route}) => {
             source={
               item.image_url
                 ? {uri: item.image_url}
-                : require('../Assets/flashfeed.jpg')
+                : require('../../Assets/flashfeed.jpg')
             }
             style={{width: '100%', height: 220, resizeMode: 'cover'}}
           />
@@ -68,7 +64,7 @@ const NewsDetail = ({navigation, route}) => {
               style={{
                 textAlign: 'left',
                 fontSize: 17,
-                marginBottom: 80,
+                marginBottom: 20,
                 lineHeight: 28,
                 color: '#000000',
               }}>
