@@ -10,7 +10,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../Screens/Home/Home';
 import NewsDetail from '../Screens/Home/NewsDetail';
 import Search from '../Screens/Search/Search';
-import Profile from '../Screens/Profile/Profile';
 import CategoryNews from '../Screens/CategoryNews/CatagoryNews';
 
 const Stack = createStackNavigator();
@@ -94,17 +93,6 @@ function RootNavigator() {
             <Icon name="card-search" color={color} size={size} />
           ),
           tabBarLabel: 'Search',
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <Icon name="account" color={color} size={size} />
-          ),
-          tabBarLabel: 'Profile',
         }}
       />
     </Tab.Navigator>
