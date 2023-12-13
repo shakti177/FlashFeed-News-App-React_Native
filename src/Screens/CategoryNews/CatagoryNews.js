@@ -12,7 +12,7 @@ import CheckInternet from '../CheckInternet';
 import NetInfo from '@react-native-community/netinfo';
 
 const CategoryNews = ({route, navigation}) => {
-  const {category} = route.params;
+  const {category, title} = route.params;
   const [categoryNews, setCategoryNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPageId, setNextPageId] = useState(null);
@@ -27,6 +27,10 @@ const CategoryNews = ({route, navigation}) => {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    navigation.setOptions({title: `${title} News`});
+  }, [title, navigation]);
 
   const getAPIData = async (pageID = null) => {
     let URL = `https://newsdata.io/api/1/news?apikey=pub_33659a507f4d0fe3b1008e30b70a8a2bc7b14&language=en&country=in&category=${category}`;
@@ -153,9 +157,6 @@ const CategoryNews = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Flash Feed</Text>
-      </View>
       {isLoading ? (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ActivityIndicator size="large" color="#d00000" />
@@ -165,21 +166,6 @@ const CategoryNews = ({route, navigation}) => {
           <FlatList
             data={categoryNews}
             renderItem={renderItem}
-            ListHeaderComponent={
-              <View>
-                <Text
-                  style={{
-                    textTransform: 'capitalize',
-                    fontSize: 24,
-                    paddingLeft: 10,
-                    paddingVertical: 10,
-                    fontWeight: '600',
-                    color: 'black',
-                  }}>
-                  {category} News
-                </Text>
-              </View>
-            }
             ListFooterComponent={renderLoader}
             onEndReached={loadMoreNews}
             onEndReachedThreshold={0.1}
@@ -198,22 +184,7 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: '#ffffff',
-    paddingBottom: 60,
   },
-  titleContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000000',
-    width: '100%',
-    padding: 14,
-  },
-
-  title: {
-    color: '#ffffff',
-    fontSize: 26,
-    fontWeight: '700',
-  },
-
   newsContainer: {
     backgroundColor: '#ffffff',
     marginBottom: 20,

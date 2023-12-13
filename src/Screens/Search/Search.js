@@ -29,7 +29,10 @@ const Search = ({navigation}) => {
       const lowerCaseCategories = categories.map(cat => cat.toLowerCase());
 
       if (lowerCaseCategories.includes(lowercaseCategory)) {
-        navigation.navigate('CategoryNews', {category: lowercaseCategory});
+        navigation.navigate('CategoryNews', {
+          category: lowercaseCategory,
+          title: category,
+        });
       } else {
         Alert.alert('Category not found');
       }
@@ -46,9 +49,6 @@ const Search = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Flash Feed</Text>
-      </View>
       <TextInput
         style={styles.input}
         placeholder="Search categories..."
@@ -108,18 +108,6 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginBottom: 10,
-  },
-  titleContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000000',
-    width: '100%',
-    padding: 14,
-  },
-  title: {
-    color: '#ffffff',
-    fontSize: 26,
-    fontWeight: '700',
   },
 });
 

@@ -30,7 +30,6 @@ function HomeStack() {
         name="NewsDetail"
         component={NewsDetail}
         options={{
-          headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
@@ -45,7 +44,6 @@ function CatagoryStack() {
         name="Search"
         component={Search}
         options={{
-          headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
@@ -53,7 +51,6 @@ function CatagoryStack() {
         name="CategoryNews"
         component={CategoryNews}
         options={{
-          headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
@@ -61,7 +58,6 @@ function CatagoryStack() {
         name="NewsDetail"
         component={NewsDetail}
         options={{
-          headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />

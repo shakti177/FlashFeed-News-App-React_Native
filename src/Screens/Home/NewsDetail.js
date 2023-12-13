@@ -4,18 +4,18 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 
-const NewsDetail = ({route}) => {
+const NewsDetail = ({route, navigation}) => {
   const {item} = route.params;
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({title: item.title});
+  }, [navigation, item.title]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Flash Feed</Text>
-      </View>
       <ScrollView>
         <View style={{backgroundColor: '#ffffff'}}>
           <Image
@@ -84,23 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     height: '100%',
   },
-  titleContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    backgroundColor: '#000000',
-    width: '100%',
-    padding: 14,
-  },
-
-  title: {
-    color: '#ffffff',
-    fontSize: 26,
-    fontWeight: '700',
-    marginRight: 'auto',
-  },
-
   homeIcon: {
     width: 30,
     height: 30,
