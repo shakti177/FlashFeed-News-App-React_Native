@@ -11,11 +11,12 @@ import Home from '../Screens/Home/Home';
 import NewsDetail from '../Screens/Home/NewsDetail';
 import Search from '../Screens/Search/Search';
 import Profile from '../Screens/Profile/Profile';
+import CategoryNews from '../Screens/CategoryNews/CatagoryNews';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyStack() {
+function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -23,6 +24,37 @@ function MyStack() {
         component={Home}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="NewsDetail"
+        component={NewsDetail}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function CatagoryStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+      <Stack.Screen
+        name="CategoryNews"
+        component={CategoryNews}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
       <Stack.Screen
@@ -48,7 +80,7 @@ function RootNavigator() {
       }}>
       <Tab.Screen
         name="HomeStack"
-        component={MyStack}
+        component={HomeStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -58,8 +90,8 @@ function RootNavigator() {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
+        name="CategoryStack"
+        component={CatagoryStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
