@@ -13,7 +13,9 @@ const Slider = ({topNews, navigation}) => {
     navigation.navigate('NewsDetail', {item});
   };
 
-  const topCategoryNews = topNews.filter(item => item.category.includes('top'));
+  const topCategoryNews = topNews.filter(item =>
+    item.category.includes('top' || 'Sports'),
+  );
 
   return (
     <View>
@@ -45,7 +47,7 @@ const Slider = ({topNews, navigation}) => {
                   source={
                     item.image_url
                       ? {uri: item.image_url}
-                      : require("../../Assets/flashfeed.jpg")
+                      : require('../../Assets/flashfeed.jpg')
                   }
                   resizeMode="cover"
                   borderRadius={10}
@@ -58,7 +60,7 @@ const Slider = ({topNews, navigation}) => {
                     style={{
                       color: 'white',
                       fontWeight: '600',
-                      fontSize: 17,
+                      fontSize: 15,
                       backgroundColor: 'rgba(0, 0, 0, 0.57)',
                       padding: 5,
                       paddingBottom: 10,

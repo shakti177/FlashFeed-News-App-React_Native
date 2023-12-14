@@ -53,7 +53,11 @@ const CategoryNews = ({route, navigation}) => {
     return (
       <View style={styles.newsContainer}>
         <Pressable
-          onPress={() => navigation.navigate('NewsDetail', {item: item})}>
+          onPress={() => navigation.navigate('NewsDetail', {item: item})}
+          style={{
+            borderColor: '#e9eaf0',
+            borderWidth: 1,
+          }}>
           <Image
             source={
               item.image_url
@@ -62,18 +66,22 @@ const CategoryNews = ({route, navigation}) => {
             }
             style={{
               width: '100%',
-              height: 200,
+              height: 250,
               resizeMode: 'cover',
               backgroundColor: '#ffffff',
               marginBottom: 8,
             }}
           />
-          <View>
+          <View
+            style={{
+              paddingHorizontal: 20,
+              paddingVertical: 10,
+            }}>
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: '700',
-                marginBottom: 10,
+                marginBottom: 15,
                 textAlign: 'left',
                 color: '#000000',
               }}>
@@ -112,7 +120,7 @@ const CategoryNews = ({route, navigation}) => {
               style={{
                 fontSize: 15,
                 textAlign: 'left',
-                color: '#000000',
+                color: '#767e94',
               }}>
               {item.description}
             </Text>
