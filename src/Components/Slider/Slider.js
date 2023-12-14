@@ -14,7 +14,7 @@ const Slider = ({topNews, navigation}) => {
   };
 
   const topCategoryNews = topNews.filter(item =>
-    item.category.includes('top' || 'Sports'),
+    item.category.includes('top' || 'Sports' || 'Entertainment'),
   );
 
   return (
