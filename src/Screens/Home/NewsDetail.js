@@ -1,10 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native';
+import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 
 const NewsDetail = ({route, navigation}) => {
@@ -18,14 +12,24 @@ const NewsDetail = ({route, navigation}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={{backgroundColor: '#ffffff'}}>
-          <Image
-            source={
-              item.image_url
-                ? {uri: item.image_url}
-                : require('../../Assets/flashfeed.jpg')
-            }
-            style={{width: '100%', height: 220, resizeMode: 'cover'}}
-          />
+          <View
+            style={{
+              width: '100%',
+              height: 250,
+            }}>
+            <Image
+              source={
+                item.image_url
+                  ? {uri: item.image_url}
+                  : require('../../Assets/flashfeed.jpg')
+              }
+              style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'stretch',
+              }}
+            />
+          </View>
           <View style={{padding: 14}}>
             <Text
               style={{

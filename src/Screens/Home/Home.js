@@ -55,20 +55,26 @@ const Home = ({navigation}) => {
             borderColor: '#e9eaf0',
             borderWidth: 1,
           }}>
-          <Image
-            source={
-              item.image_url
-                ? {uri: item.image_url}
-                : require('../../Assets/flashfeed.jpg')
-            }
+          <View
             style={{
               width: '100%',
               height: 250,
-              resizeMode: 'cover',
-              backgroundColor: '#ffffff',
-              marginBottom: 8,
-            }}
-          />
+            }}>
+            <Image
+              source={
+                item.image_url
+                  ? {uri: item.image_url}
+                  : require('../../Assets/flashfeed.jpg')
+              }
+              style={{
+                width: '100%',
+                height: '100%',
+                resizeMode : "stretch",
+                backgroundColor: '#ffffff',
+                marginBottom: 8,
+              }}
+            />
+          </View>
           <View
             style={{
               paddingHorizontal: 20,
